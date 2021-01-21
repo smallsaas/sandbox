@@ -1,0 +1,16 @@
+version: "3"
+# docker-compose -f docker-compose.yml up --detach --build   ## for recreating the change
+services:
+  mysqlserver:
+     image: zelejs/mysql:5.7
+     container_name: mysqlserver
+     privileged: true
+     restart: always
+     environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: test
+     volumes:
+        - /var/local/mysql/data:/var/lib/mysql
+        - /var/local/mysql/logs:/var/log/mysql
+    ports:
+        - '3306:3306'
