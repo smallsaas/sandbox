@@ -1,0 +1,16 @@
+version: "3"
+# docker-compose -f docker-compose.yml up --detach --build  ## for recreating th
+services:
+  api:
+    image: zelejs/allin-web:jdk11
+    container_name: api
+    volumes: 
+      - ./api/app.jar:/webapps/app.jar
+      - ./config/application.yml:/webapps/config/application.yml
+    #ports:
+    #  - '8080:8080'
+
+networks: 
+  default: 
+    external:
+      name: sandbox_network

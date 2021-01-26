@@ -1,11 +1,11 @@
-version: "3"
+version: "3.4"
 # docker-compose -f docker-compose.yml up --detach --build   ## for recreating the change
 services:
   mysqlserver:
      image: zelejs/mysql:5.7
      container_name: mysqlserver
      privileged: true
-     restart: always
+     #restart: always
      environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: test
@@ -14,3 +14,8 @@ services:
         - /var/local/mysql/logs:/var/log/mysql
     ports:
         - '3306:3306'
+
+network:
+  default:
+    external:
+      name: sandbox_network
