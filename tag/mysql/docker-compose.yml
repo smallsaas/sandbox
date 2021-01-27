@@ -15,7 +15,7 @@ services:
 #     ports:
 #         - '3306:3306'
 
-network:
+networks:
   default:
     external:
       name: sandbox_network
