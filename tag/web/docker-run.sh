@@ -1,10 +1,10 @@
   
 #!/bin/sh
 
-git clone https://github.com/smallsaas/sandbox-web Docker
+git clone https://github.com/smallsaas/sandbox-web .
 
-if [ ! -d ./Docker ];then
-  echo clone sandbox-web fail !
+if [ ! -f ./docker-compose.yml ];then
+  echo download docker-compose.yml fails !
   exit
 fi
 
@@ -12,5 +12,4 @@ fi
 # curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/script/check_default_network.sh | bash -
 
 ## up
-cd Docker
 docker-compose up

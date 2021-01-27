@@ -5,7 +5,7 @@ services:
      image: zelejs/mysql:5.7
      container_name: mysqlserver
      privileged: true
-     #restart: always
+     restart: always
      environment:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: test

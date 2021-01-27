@@ -15,5 +15,5 @@ if [ -f docker-compose.yml ];then
    echo docker-compose up -d
    docker-compose up -d
 else
-   echo docker-compose.yml download fails!
+   echo download docker-compose.yml fails!
 fi
