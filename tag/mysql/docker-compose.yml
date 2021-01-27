@@ -5,15 +5,15 @@ services:
      image: zelejs/mysql:5.7
      container_name: mysqlserver
      privileged: true
-     restart: always
+#      restart: always
      environment:
         MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: test
-     volumes:
-        - /var/local/mysql/data:/var/lib/mysql
-        - /var/local/mysql/logs:/var/log/mysql
-    ports:
-        - '3306:3306'
+        MYSQL_DATABASE: sandbox
+#      volumes:
+#         - /var/local/mysql/data:/var/lib/mysql
+#         - /var/local/mysql/logs:/var/log/mysql
+#     ports:
+#         - '3306:3306'
 
 network:
   default:
