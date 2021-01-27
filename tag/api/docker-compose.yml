@@ -1,0 +1,21 @@
+version: "3.4"
+# COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
+services:
+  api:
+    #image: zelejs/allin-web:jdk11
+    image: zelejs/app-openjre11:alpine-slim
+    container_name: api
+    volumes: 
+      - ./config/application.yml:/webapps/config/application.yml
+      - ./target/app.jar:/webapps/app.jar
+    #command:
+    #  - /usr/local/bin/run.sh
+    #  - produce
+    #ports: 
+    #  - 8080:8080
+
+networks: 
+  default:
+    external: 
+      name: sandbox_network
+
