@@ -26,5 +26,9 @@ docker network create sandbox_network
 | web      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/web/docker-run.sh \| bash -` | [sandbox-web](https://github.com/smallsaas/sandbox-web) |
 | api      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/api/docker-run.sh \| bash -` | [sandbox-api](https://github.com/smallsaas/sandbox-api) |
 | mysql    | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/mysql/docker-run.sh \| bash -` | [docker-compose.yml](./tag/mysql/docker-compose.yml)  |
-| registry | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/registry/docker-run.sh \| bash -` |                                                    |
-| build jar| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/docker/docker-build.sh \| bash -` | 通过容器构建 -standalone.jar                        |
+| registry | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/registry/docker-run.sh \| bash -` |                  |
+
+#### 一键构建
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| build jar| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/docker/docker-build.sh \| bash -` | 通过容器构建 -standalone.jar |
