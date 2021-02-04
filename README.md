@@ -32,3 +32,4 @@ docker network create sandbox_network
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
 | build jar| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/docker/docker-build.sh \| bash -` | 通过容器构建 -standalone.jar |
+| build image| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/build/docker-build.sh \| bash -s <image-name>` | 通过容器构建 docker image |
