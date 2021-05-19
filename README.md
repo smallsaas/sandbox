@@ -1,22 +1,8 @@
-# 用于开发环境的快速部署方案
+## 用于开发环境的快速部署方案
 
-## sandbox api
-> 基于 Sandbox 的一键部署方案
-
-#### 配置 raw.githubusercontent.com 域名IP
-```
-cat /etc/hosts
-151.101.64.133 raw.githubusercontent.com
-```
-或
-```
-echo '151.101.64.133 raw.githubusercontent.com' >> /etc/hosts
-```
-
-#### 创建 sandbox network
-> 以下服务可以独立运行，只要使用同一网络，先创建网络
-```
-docker network create sandbox_network
+#### 已构建`dist`, 一健部署
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/dist-run.sh | sh 
 ```
 
 
