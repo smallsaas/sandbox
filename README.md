@@ -1,8 +1,25 @@
 ## 用于开发环境的快速部署方案
 
-#### 已构建`dist`, 一健部署
+#### 一键部署`dist` 
+> 脚本 [dist-run.sh](./script/dist-run.sh)
+>
+已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务，随后可直接执行`build.sh`脚本, 或增加`-d`参数后台启动`sh build.sh -d`
+>
 ```shell
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/dist-run.sh | sh 
+```
+
+#### 一键构建`.jar`
+> 脚本 [pom-build.sh](./script/pom-build.sh)
+>
+源代码目录如下
+```
+src/
+pom.xml
+```
+在`pom.xml`同级目录下执行以下脚本，即可构建出`-standalone.jar`执行包
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/pom-build.sh | sh 
 ```
 
 
