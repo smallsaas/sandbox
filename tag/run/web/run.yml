@@ -1,0 +1,8 @@
+version: "3.4"
+services:
+  runner:
+    image: daocloud.io/library/node:12
+    working_dir: /usr/src
+    volumes: 
+      - ./package.json:/usr/src/package.json
+      - ./src:/usr/src/src

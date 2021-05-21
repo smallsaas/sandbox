@@ -119,7 +119,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh
 `web`源代码同级目录下执行以下脚本实现一键启动服务
 >
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/web-run.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
 ```
 
 

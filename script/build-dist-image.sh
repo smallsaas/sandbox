@@ -10,8 +10,8 @@ echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/dist/Do
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/dist/Dockerfile
 
 if [ ! -f ./docker-build.sh ];then
-echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/docker-build.sh'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/docker-build.sh
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/build-image.sh'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/build-image.sh
 fi
 
 
