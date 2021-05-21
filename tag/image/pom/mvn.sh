@@ -1,2 +1,2 @@
 #!/bin/sh
-docker-compose run --rm mvn bash
+docker-compose -f mvn.yml run --rm mvn bash
