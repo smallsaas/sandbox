@@ -58,7 +58,7 @@ target/api-1.0.0-standalone.jar
 在`standalone.jar`同级目录下执行以下脚本，即可构建Docker Image
 > 如果`standalone.jar`在`target`目录下，先cd进行target目录
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar-image.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar-image.sh | sh -s <image>
 ```
 >
 >
@@ -71,9 +71,13 @@ pom.xml
 >
 在`pom.xml`同级目录下执行以下脚本
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh | sh -s <image>
 ```
-
+>
+右编译不通过，可进入`mvn`容器进行调试
+```shell
+sh mvn.sh
+```
 
 #### 一键构建`web`镜像
 - 基于`dist`构建
@@ -81,7 +85,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.s
 >
 在`dist`同级目录下执行以下脚本
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh | sh -s <image>
 ```
 
 - 基于源代码`[src, package.json]`构建
@@ -94,18 +98,20 @@ package.json
 >
 在`package.json`同级目录下执行以下脚本
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh | sh -s <image>
 ```
-
 
 
 ## 启动
 
 #### 一键启动`dist`
-> 脚本 [dist-run.sh](./script/dist-run.sh)
+> 脚本 [run-dist.sh](./script/run-dist.sh)
 >
-已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务，随后可直接执行`build.sh`脚本, 或增加`-d`参数后台启动`sh build.sh -d`
->
+已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务
+```
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh 
+```
+
 
 #### 一键启动`[src, package.json]` 
 > 脚本 [web-run.sh](./script/web-run.sh)
@@ -115,6 +121,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.s
 ```shell
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/web-run.sh | sh 
 ```
+
 
 #### 一键部署
 | Type     | Script                                                                                 | Link                          |
