@@ -1,6 +1,23 @@
-## 用于开发环境的快速部署方案
+# 用于开发环境的快速部署方案
 
-## 构建
+### 一键构建安装包
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| build jar| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar.sh \| sh` | 通过容器构建jar |
+| build dist| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh \| sh` | 通过容器构建dist |
+||||
+>
+### 一键构建镜像
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| jar image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar-image.sh \| sh -s <image>` | 通过`jar`构建`api`镜像 |
+| dist image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh \| sh -s <image>` | 通过`dist`构建`web`镜像 |
+| pom.xml image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh \| sh -s <image>` | 通过`pom.xml`构建`api`镜像 |
+| web image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh \| sh -s <image>` | 通过`package.json`构建`web`镜像 |
+||||
+
+
+## 构建安装包
 
 #### 一键构建`.jar`
 > 脚本 [build-jar.sh](./script/build-jar.sh)
@@ -29,6 +46,59 @@ package.json
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | sh 
 ```
 
+## 构建镜像
+
+#### 一键构建`api`镜像
+- 基于`-standalone.jar`构建
+> 脚本 [build-jar-image.sh](./script/build-jar-image.sh)
+```
+target/api-1.0.0-standalone.jar
+```
+>
+在`standalone.jar`同级目录下执行以下脚本，即可构建Docker Image
+> 如果`standalone.jar`在`target`目录下，先cd进行target目录
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar-image.sh | sh 
+```
+>
+>
+- 基于源代码`[src, pom.xml]`构建
+> 脚本 [build-pom-image.sh](./script/build-pom-image.sh)
+```
+src/
+pom.xml
+```
+>
+在`pom.xml`同级目录下执行以下脚本
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh | sh 
+```
+
+
+#### 一键构建`web`镜像
+- 基于`dist`构建
+> 脚本 [build-dist-image.sh](./script/build-dist-image.sh)
+>
+在`dist`同级目录下执行以下脚本
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh | sh 
+```
+
+- 基于源代码`[src, package.json]`构建
+> 脚本 [build-web-image.sh](./script/build-web-image.sh)
+```
+public/
+src/
+package.json
+```
+>
+在`package.json`同级目录下执行以下脚本
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh | sh 
+```
+
+
+
 ## 启动
 
 #### 一键启动`dist`
@@ -46,7 +116,6 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | s
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/web-run.sh | sh 
 ```
 
-
 #### 一键部署
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
@@ -54,9 +123,3 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/web-run.sh | sh
 | api      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/api/docker-run.sh \| bash -` | [sandbox-api](https://github.com/smallsaas/sandbox-api) |
 | mysql    | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/mysql/docker-run.sh \| bash -` | [docker-compose.yml](./tag/mysql/docker-compose.yml)  |
 | registry | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/registry/docker-run.sh \| bash -` |                  |
-
-#### 一键构建
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| build jar| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/docker/docker-build.sh \| bash -` | 通过容器构建 -standalone.jar |
-| build image| `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/build/docker-build.sh \| bash -s <image-name>` | 通过容器构建 docker image |

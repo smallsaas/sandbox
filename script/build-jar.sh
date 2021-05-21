@@ -12,5 +12,5 @@ echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/script/build.
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/script/build.sh
 fi
 
-echo "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build $@"
+echo "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build $@"
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build $@ # --detach
