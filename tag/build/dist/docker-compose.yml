@@ -1,0 +1,11 @@
+version: "3.4"
+# COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build
+services:
+  web:
+    image: build-dist
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ./dist:/dist
+    network_mode: host

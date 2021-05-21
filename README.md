@@ -1,16 +1,9 @@
 ## 用于开发环境的快速部署方案
 
-#### 一键部署`dist` 
-> 脚本 [dist-run.sh](./script/dist-run.sh)
->
-已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务，随后可直接执行`build.sh`脚本, 或增加`-d`参数后台启动`sh build.sh -d`
->
-```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/dist-run.sh | sh 
-```
+## 构建
 
 #### 一键构建`.jar`
-> 脚本 [pom-build.sh](./script/pom-build.sh)
+> 脚本 [build-jar.sh](./script/build-jar.sh)
 >
 源代码目录如下
 ```
@@ -19,7 +12,38 @@ pom.xml
 ```
 在`pom.xml`同级目录下执行以下脚本，即可构建出`-standalone.jar`执行包
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/pom-build.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar.sh | sh 
+```
+
+#### 一键构建`dist`
+> 脚本 [build-dist.sh](./script/build-dist.sh)
+>
+源代码目录如下
+```
+public/
+src/
+package.json
+```
+在`package.json`同级目录下执行以下脚本，即可构建出`dist`
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | sh 
+```
+
+## 启动
+
+#### 一键启动`dist`
+> 脚本 [dist-run.sh](./script/dist-run.sh)
+>
+已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务，随后可直接执行`build.sh`脚本, 或增加`-d`参数后台启动`sh build.sh -d`
+>
+
+#### 一键启动`[src, package.json]` 
+> 脚本 [web-run.sh](./script/web-run.sh)
+>
+`web`源代码同级目录下执行以下脚本实现一键启动服务
+>
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/web-run.sh | sh 
 ```
 
 
