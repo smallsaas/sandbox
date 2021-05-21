@@ -1,3 +1,9 @@
-  
 #!/bin/sh
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build $@ # --no-cache
+image=$1
+if [ ! $image ];then
+  echo 'no image arg !'
+  exit
+fi
+
+docker build . -t $@ 
+docker images --format "table {{.Repository}}\t{{.Tag}}" $@

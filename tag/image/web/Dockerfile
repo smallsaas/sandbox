@@ -12,5 +12,6 @@ ADD ./src  ./src
 ADD ./public ./public 
 RUN --mount=type=cache,id=node_modules_cache,target=/usr/src/node_modules,rw npm run build 
 
-## final
-CMD ["sh", "-c", "/bin/cp -r /usr/src/dist/* /dist"]
+#final-stage
+FROM daocloud.io/library/nginx:latest
+COPY --from=build /usr/src/build /usr/share/nginx/html
