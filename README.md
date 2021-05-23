@@ -1,5 +1,17 @@
 # 用于开发环境的快速部署方案
 
+一键安装 `docker`
+```shell
+curl -sSL https://get.daocloud.io/docker | sh
+```
+>
+一键安装 `docker-comppose`
+> [Github](https://github.com/docker/compose)
+```shell
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+
 ### 一键构建安装包
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
