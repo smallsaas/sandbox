@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   api:
-    image: app:api
+    image: sandbox-app:api  #change 'sandbox-app' image to aplication image
     working_dir: /webapps
     volumes: 
       - ./api/config/application-dev.yml:/webapps/config/application-dev.yml

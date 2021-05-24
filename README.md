@@ -145,7 +145,6 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.s
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh 
 ```
 
-
 #### 一键启动`[src, package.json]` 
 > 脚本 [web-run.sh](./script/web-run.sh)
 >
@@ -155,11 +154,18 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
 ```
 
-
 #### 一键启动`api` image
 基于已构构建的`api`image, 实现一键启动`api`服务
 >需要配置`docker-compose.yml`变更镜像(image)名称, 从及配置`config/application-dev.yml`连接数据库
 >
 ```shell
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-api.sh | sh
+```
+
+## 部署
+
+#### 一键部署`api`
+> 执行以下脚本，修改`docker-compose.yml`中的部署目标镜像，然后直接执行`deploy.sh`脚本
+```
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-api.sh | sh 
 ```
