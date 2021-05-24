@@ -26,44 +26,27 @@ chmod +x /usr/local/bin/docker-compose
 | dist image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh \| sh -s <image>` | 通过`dist`构建`web`镜像 |
 | pom.xml image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh \| sh -s <image>` | 通过`pom.xml`构建`api`镜像 |
 | web image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh \| sh -s <image>` | 通过`package.json`构建`web`镜像 |
-| web dev image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-dev-image.sh \| sh -s <image>` | 通过`package.json`构建`web dev`镜像 |
+| web node image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-dev-image.sh \| sh -s <image>` | 通过`package.json`构建`web node`镜像 |
 ||||
 
 #### 一键启动
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
 | dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
-| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web[src, package.json]`  |
+| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web [src, package.json]`  |
 | jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 直接启动`jar`,需配置数据库连接 |
-| api | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-api.sh \| sh ` | 启动`api` image,需配置数据库连接 |
 ||||
-
 
 #### 一键部署
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
-| mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
 | frps | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frps.sh \| sh` | 部署`frps` |
 | frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
-||||
-
-#### 一键启动
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 启动`dist` |
-| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 启动`web`  |
-| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 启动`jar`  |
-||||
-
-
-#### 一键部署
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
 | registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
+| redis    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-redis.sh \| sh` | 部署`redis`  |
 | mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
-| frps | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frps.sh \| sh` | 部署`frps` |
-| frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
+| api | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-api.sh \| sh ` | 部署`api` |
+| web node | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-node.sh \| sh ` | 部署由源代码构建的`web node`镜像 |
 ||||
 
 

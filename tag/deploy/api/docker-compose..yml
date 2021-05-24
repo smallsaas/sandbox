@@ -1,9 +1,8 @@
 version: "3.4"
-# COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
 services:
   api:
     image: app:api
-    container_name: app_api
+    working_dir: /webapps
     volumes: 
       - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 

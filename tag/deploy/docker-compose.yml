@@ -2,8 +2,7 @@ version: "3.4"
 # COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
 services:
   api:
-    image: app:api
-    container_name: app_api
+    image: sandbox-app:api  #change the api iamge
     volumes: 
       - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
@@ -14,8 +13,7 @@ services:
       - redis_default
 
   web:
-    image: app:gateway
-    container_name: app_web
+    image: sandbox-app:gateway  #change the web image 
     volumes: 
       - ./bin/attachments:/usr/share/nginx/html/attachments
       - ./gateway/conf.d/80.conf:/etc/nginx/conf.d/80.conf
@@ -24,7 +22,7 @@ services:
   
 networks: 
   default:
-    name: app_default
+    name: app_default   #change the network name
   mysqlserver_default:
     external: true
   redis_default:

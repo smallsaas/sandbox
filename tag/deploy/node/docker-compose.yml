@@ -1,0 +1,11 @@
+version: "3.4"
+services:
+  web:
+    image: daocloud.io/library/node:12
+    volumes: 
+        - ./config.js:/usr/src/src/config.js
+    ports: 
+      - 8000:8000
+    command: 
+        - npm
+        - start

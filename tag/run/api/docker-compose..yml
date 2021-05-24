@@ -1,9 +1,0 @@
-version: "3.4"
-services:
-  api:
-    image: app:api  #change the image 
-    working_dir: /webapps
-    volumes: 
-      - ./config/application-dev.yml:/webapps/config/application-dev.yml
-    ports: 
-      - 8080:8080
