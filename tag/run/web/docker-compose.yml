@@ -1,7 +1,16 @@
 version: "3.4"
 services:
   web:
-    build: 
-      context: .
+    volumes: 
+        - ./node_modules:/usr/src/node_modules
+        - ./package.json:/usr/src/package.json
+        - ./src:/usr/src/src
+        - ./public:/usr/src/public
+        - ./init.js:/usr/src/init.js
     ports: 
-      - 8000:80
+      - 8000:8000
+    command: 
+        - npm
+        - install
+        - |
+          npm start

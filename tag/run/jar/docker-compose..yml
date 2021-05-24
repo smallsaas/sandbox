@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  api:
+    image: adoptopenjdk:11-jre-hotspot
+    working_dir: /webapps
+    volumes: 
+      - ./config/application-dev.yml:/webapps/config/application-dev.yml
+      - ./target:/WEBAPPS
+    ports: 
+      - 8080:8080
+    command: 
+      - /bin/sh
+      - -c 
+      - |
+        cp /WEBAPPS/*-standalone.jar /webapps/app.jar
+        java -jar /webapps/app.jar --spring.profiles.active=dev --server.port=8080

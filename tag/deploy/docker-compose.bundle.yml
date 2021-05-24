@@ -1,0 +1,42 @@
+version: "3.4"
+# COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
+services:
+  api:
+    image: app:api
+    container_name: app_api
+    volumes: 
+      - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
+    ports: 
+      - 8080:8080
+
+  db: 
+    image: 'daocloud.io/library/mysql:5.7'
+    container_name: app_db
+    privileged: true
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
+
+  redis:
+    # image: 'daocloud.io/library/redis:3.2.9'
+    image: redis:6.2.3
+    container_name: redis
+    privileged: true
+    volumes:
+      - ./redis/conf:/usr/local/etc/redis
+    command:
+      redis-server /usr/local/etc/redis/redis.conf
+    # ports:
+    #   - 127.0.0.1:6379:6379
+
+  web:
+    image: app:web
+    container_name: app_web
+    volumes: 
+      - ./web/config/global.js:/usr/src/web/src/global.js
+    ports:
+      - 8000:8000

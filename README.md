@@ -1,5 +1,17 @@
 # 用于开发环境的快速部署方案
 
+一键安装 `docker`
+```shell
+curl -sSL https://get.daocloud.io/docker | sh
+```
+>
+一键安装 `docker-comppose`
+> [Github](https://github.com/docker/compose)
+```shell
+curl -L https://get.daocloud.io/docker/compose/releases/download/1.27.4/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
+
 ### 一键构建安装包
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
@@ -14,6 +26,25 @@
 | dist image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist-image.sh \| sh -s <image>` | 通过`dist`构建`web`镜像 |
 | pom.xml image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.sh \| sh -s <image>` | 通过`pom.xml`构建`api`镜像 |
 | web image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh \| sh -s <image>` | 通过`package.json`构建`web`镜像 |
+| web dev image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-dev-image.sh \| sh -s <image>` | 通过`package.json`构建`web dev`镜像 |
+||||
+
+#### 一键启动
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
+| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web[src, package.json]`  |
+| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 直接启动`jar`,需配置数据库连接 |
+||||
+
+
+#### 一键部署
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
+| mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
+| frps | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frps.sh \| sh` | 部署`frps` |
+| frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
 ||||
 
 
@@ -122,11 +153,3 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
 ```
 
-
-#### 一键部署
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| web      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/web/docker-run.sh \| bash -` | [sandbox-web](https://github.com/smallsaas/sandbox-web) |
-| api      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/api/docker-run.sh \| bash -` | [sandbox-api](https://github.com/smallsaas/sandbox-api) |
-| mysql    | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/mysql/docker-run.sh \| bash -` | [docker-compose.yml](./tag/mysql/docker-compose.yml)  |
-| registry | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/registry/docker-run.sh \| bash -` |                  |

@@ -1,21 +1,18 @@
 version: "3.4"
-# docker-compose -f docker-compose.yml up --detach --build   ## for recreating the change
 services:
-  mysqlserver:
-     image: zelejs/mysql:5.7
-     container_name: mysqlserver
-     privileged: true
-#      restart: always
-     environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: sandbox
-#      volumes:
-#         - /var/local/mysql/data:/var/lib/mysql
-#         - /var/local/mysql/logs:/var/log/mysql
-#     ports:
-#         - '3306:3306'
+  db: 
+    container_name: mysqlserver
+    image: 'daocloud.io/library/mysql:5.7'
+    privileged: true
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
+      # - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
 networks:
   default:
-    external:
-      name: sandbox_network
+    name: mysqlserver_default

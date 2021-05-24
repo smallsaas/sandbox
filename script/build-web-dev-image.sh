@@ -6,8 +6,8 @@ if [ ! $image ];then
 fi
 
 # docker-compose.yml
-echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/web/Dockerfile'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/web/Dockerfile
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/dev/Dockerfile'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/image/dev/Dockerfile
 
 if [ ! -f ./docker-build.sh ];then
 echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/build-image.sh'
