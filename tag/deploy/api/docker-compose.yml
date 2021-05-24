@@ -4,6 +4,6 @@ services:
     image: sandbox-app:api  #change 'sandbox-app' image to aplication image
     working_dir: /webapps
     volumes: 
-      - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
+      - ./config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
       - 8080:8080

@@ -2,8 +2,9 @@ version: "3.4"
 # COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
 services:
   api:
-    image: app:api
-    container_name: app_api
+    image: sandbox-app:api
+    build: 
+      context: .
     volumes: 
       - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
@@ -11,7 +12,6 @@ services:
 
   db: 
     image: 'daocloud.io/library/mysql:5.7'
-    container_name: app_db
     privileged: true
     restart: always
     environment:
@@ -34,9 +34,13 @@ services:
     #   - 127.0.0.1:6379:6379
 
   web:
-    image: app:web
-    container_name: app_web
+    image: sandbox-app:web
+    build: 
+      context: .
     volumes: 
+      - ./bin/attachments:/usr/share/nginx/html/attachments
+      - ./gateway/conf.d/80.conf:/etc/nginx/conf.d/80.conf
+      # for web node image only
       - ./web/config/global.js:/usr/src/web/src/global.js
     ports:
       - 8000:8000

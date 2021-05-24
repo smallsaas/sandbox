@@ -19,8 +19,9 @@ if [ ! -f deploy.sh ];then
   curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy.sh
 fi
 
-
 ## start
-echo 'change the image name in docker-compose.yml, and run below command'
+echo '=>change the targetr image name in docker-compose.yml, '
+echo '=>config config/application-dev.yml for database connection'
+echo ', and then run below command'
 echo "docker-compose up $@"
 # docker-compose up $@
