@@ -1,0 +1,31 @@
+version: "3.4"
+# COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
+services:
+  api:
+    image: app:api
+    container_name: app_api
+    volumes: 
+      - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
+    ports: 
+      - 8080:8080
+    networks: 
+      - app_default
+      - mysqlserver_default
+      - redis_default
+
+  web:
+    image: app:gateway
+    container_name: app_web
+    volumes: 
+      - ./bin/attachments:/usr/share/nginx/html/attachments
+      - ./gateway/conf.d/80.conf:/etc/nginx/conf.d/80.conf
+    ports:
+      - 8000:8000
+  
+networks: 
+  default:
+    name: app_default
+  mysqlserver_default:
+    external: true
+  redis_default:
+    expose: true

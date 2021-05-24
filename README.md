@@ -28,6 +28,24 @@ chmod +x /usr/local/bin/docker-compose
 | web image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh \| sh -s <image>` | 通过`package.json`构建`web`镜像 |
 ||||
 
+#### 一键启动
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 启动`dist` |
+| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 启动`web`  |
+| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 启动`jar`  |
+||||
+
+
+#### 一键部署
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
+| mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
+| frps | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frps.sh \| sh` | 部署`frps` |
+| frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
+||||
+
 
 ## 构建安装包
 
@@ -134,11 +152,3 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
 ```
 
-
-#### 一键部署
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| web      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/web/docker-run.sh \| bash -` | [sandbox-web](https://github.com/smallsaas/sandbox-web) |
-| api      | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/api/docker-run.sh \| bash -` | [sandbox-api](https://github.com/smallsaas/sandbox-api) |
-| mysql    | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/mysql/docker-run.sh \| bash -` | [docker-compose.yml](./tag/mysql/docker-compose.yml)  |
-| registry | `curl -sL https://raw.githubusercontent.com/smallsaas/sandbox/master/tag/registry/docker-run.sh \| bash -` |                  |

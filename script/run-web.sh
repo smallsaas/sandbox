@@ -2,23 +2,17 @@
 #!/bin/sh
 
 # docker-compose.yml
-echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/Dockerfile'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/Dockerfile
 echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/docker-compose.yml'
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/docker-compose.yml
 
 ## optional for debug
-echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/run.yml'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/run.yml
-echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/run.sh'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/run.sh
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/install.sh'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/install.sh
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/start.sh'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/start.sh
 
-
-if [ ! -f ./build.sh ];then
-echo 'curl -sL https://gitee.com/smallsaas/sandbox/raw/master/tag/script/build.sh -o startup.sh'
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/tag/script/build.sh -o startup.sh
-fi
-
-
-echo "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build $@"
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build $@ # --detach
+## start
+echo "docker-compose run --rm web npm install"
+docker-compose run --rm web npm install 
+echo "docker-compose run --rm --service-ports web npm start"
+docker-compose run --rm --service-ports web npm start 

@@ -2,7 +2,7 @@ version: "3.4"
 # COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up --build
 services:
   api:
-    image: build-jar
+    image: t-build-jar  # any name
     build:
       context: .
       dockerfile: ./Dockerfile
