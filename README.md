@@ -47,6 +47,24 @@ chmod +x /usr/local/bin/docker-compose
 | frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
 ||||
 
+#### 一键启动
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 启动`dist` |
+| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 启动`web`  |
+| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 启动`jar`  |
+||||
+
+
+#### 一键部署
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
+| mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
+| frps | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frps.sh \| sh` | 部署`frps` |
+| frpc | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/frpc.sh \| sh` | 部署`frpc` |
+||||
+
 
 ## 构建安装包
 
