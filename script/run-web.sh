@@ -12,7 +12,10 @@ echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/start
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/run/web/start.sh
 
 ## start
-echo "docker-compose run --rm web npm install"
-docker-compose run --rm web npm install 
-echo "docker-compose run --rm --service-ports web npm start"
-docker-compose run --rm --service-ports web npm start 
+# echo "docker-compose run --rm web npm install"
+# docker-compose run --rm web npm install 
+# echo "docker-compose run --rm --service-ports web npm start"
+# docker-compose run --rm --service-ports web npm start 
+echo "docker-compose up"
+docker-compose up 
+

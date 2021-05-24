@@ -1,6 +1,6 @@
 ---
 spring:
-  profiles: produce
+  profiles: dev
   datasource:
       url: jdbc:mysql://mysqlserver:3306/sandbox?useSSL=false&autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
       username: root

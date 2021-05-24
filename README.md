@@ -35,6 +35,7 @@ chmod +x /usr/local/bin/docker-compose
 | dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
 | web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web[src, package.json]`  |
 | jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 直接启动`jar`,需配置数据库连接 |
+| api | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-api.sh \| sh ` | 启动`api` image,需配置数据库连接 |
 ||||
 
 
@@ -171,3 +172,11 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
 ```
 
+
+#### 一键启动`api` image
+基于已构构建的`api`image, 实现一键启动`api`服务
+>需要配置`docker-compose.yml`变更镜像(image)名称, 从及配置`config/application-dev.yml`连接数据库
+>
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-api.sh | sh
+```
