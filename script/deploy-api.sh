@@ -8,6 +8,11 @@ if [ ! -d config ];then
   mkdir config
 fi
 
+## download Dockerfile
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/build/jar/Dockerfile'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/build/api/Dockerfile
+
+## config
 cd config
 echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/config/application-dev.yml'
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/config/application-dev.yml
@@ -20,8 +25,7 @@ if [ ! -f deploy.sh ];then
 fi
 
 ## start
-echo '=>change the targetr image name in docker-compose.yml, '
 echo '=>config config/application-dev.yml for database connection'
 echo ', and then run below command'
-echo "docker-compose up $@"
-# docker-compose up $@
+echo "sh ./deploy.sh"
+sh ./deploy.sh

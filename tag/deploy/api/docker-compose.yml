@@ -1,9 +1,39 @@
 version: "3.4"
 services:
+  pull:
+    image: daocloud.io/library/node:12
+    volumes: 
+      - ./:/usr/src
+    working_dir: /usr/src
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        git pull origin master
+
+  build:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ./target:/webapps
+    network_mode: host
+
   api:
-    image: sandbox-app:api  #change 'sandbox-app' image to aplication image
+    image: adoptopenjdk:11-jre-hotspot
+    # container_name: sandbox_app_api_1
+    privileged: true
     working_dir: /webapps
     volumes: 
+      - ./target:/webapps
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
       - 8080:8080
+    depends_on: 
+      - build
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        java -jar *.jar --sprint.profiles.active=dev --server.port=8080
+
