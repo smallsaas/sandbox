@@ -2,15 +2,16 @@ version: "3.4"
 services:
   api:
     image: adoptopenjdk:11-jre-hotspot
+    # container_name: sandbox_app_api_1
+    privileged: true
     working_dir: /webapps
     volumes: 
+      - ./:/webapps
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
-      - ./target:/WEBAPPS
     ports: 
       - 8080:8080
     command: 
       - /bin/sh
-      - -c 
+      - -c
       - |
-        cp /WEBAPPS/*-standalone.jar /webapps/app.jar
-        java -jar /webapps/app.jar --spring.profiles.active=dev --server.port=8080
+        java -jar *.jar --sprint.profiles.active=dev --server.port=8080

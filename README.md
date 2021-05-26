@@ -18,7 +18,16 @@ chmod +x /usr/local/bin/docker-compose
 | build jar| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar.sh \| sh` | 通过容器构建jar |
 | build dist| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh \| sh` | 通过容器构建dist |
 ||||
->
+
+#### 一键启动
+> 基于已构建的`dist`或`-standalone.jar`
+| Type     | Script                                                                                 | Link                          |
+| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
+| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
+| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web [src, package.json]`  |
+| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 直接启动已构建的`-standalone.jar`,需配置数据库连接 |
+||||
+
 ### 一键构建镜像
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
@@ -29,14 +38,6 @@ chmod +x /usr/local/bin/docker-compose
 | web node image| `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-dev-image.sh \| sh -s <image>` | 通过`package.json`构建`web node`镜像 |
 ||||
 
-#### 一键启动
-| Type     | Script                                                                                 | Link                          |
-| :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
-| dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
-| web | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh \| sh ` | 直接启动`web [src, package.json]`  |
-| jar | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh \| sh ` | 直接启动`jar`,需配置数据库连接 |
-||||
-
 #### 一键部署
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
@@ -45,8 +46,6 @@ chmod +x /usr/local/bin/docker-compose
 | registry | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`registry` |
 | redis    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-redis.sh \| sh` | 部署`redis`  |
 | mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
-| api | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-api.sh \| sh ` | 部署`api` |
-| web node | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-node.sh \| sh ` | 部署由源代码构建的`web node`镜像 |
 ||||
 
 
@@ -162,10 +161,8 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-api.sh | sh
 ```
 
+
 ## 部署
 
 #### 一键部署`api`
-> 执行以下脚本，修改`docker-compose.yml`中的部署目标镜像，然后直接执行`deploy.sh`脚本
-```
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-api.sh | sh 
-```
+

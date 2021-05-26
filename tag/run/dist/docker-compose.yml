@@ -2,6 +2,7 @@ version: "3.4"
 services:
   web:
     image: daocloud.io/library/nginx:latest
+    # container_name: sandbox_app_web_1
     volumes: 
       - ./dist:/usr/share/nginx/html
     ports: 

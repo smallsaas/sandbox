@@ -2,6 +2,7 @@ version: "3.4"
 services:
   web:
     image: daocloud.io/library/node:12
+    # container_name: sandbox_app_web_1
     volumes: 
         - ./node_modules:/usr/src/node_modules
         - ./package.json:/usr/src/package.json
