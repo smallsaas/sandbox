@@ -27,13 +27,21 @@ services:
     volumes: 
       - ./target:/webapps
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
+    # extra_hosts: 
+    #   - "mysqlserver:192.168.3.239"
     ports: 
       - 8080:8080
-    depends_on: 
-      - build
     command: 
       - /bin/sh
       - -c
       - |
         java -jar *.jar --sprint.profiles.active=dev --server.port=8080
+    networks: 
+      - sandbox_default
+      # - mysqlserver_default
 
+networks: 
+  sandbox_default:
+    external: false
+  # mysqlserver_default:
+  #   external: false
