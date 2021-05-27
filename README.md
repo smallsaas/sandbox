@@ -3,6 +3,7 @@
 一键安装 `docker`
 ```shell
 curl -sSL https://get.daocloud.io/docker | sh
+curl -sSL https://get.docker.com | sudo sh
 ```
 >
 一键安装 `docker-comppose`
