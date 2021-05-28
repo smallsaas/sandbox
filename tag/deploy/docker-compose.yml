@@ -8,7 +8,7 @@ services:
     ports: 
       - 8080:8080
     networks: 
-      - app_default
+      - sandbox_default
       - mysqlserver_default
       - redis_default
 
@@ -22,7 +22,7 @@ services:
   
 networks: 
   default:
-    name: app_default   #change the network name
+    name: sandbox_default   #change the network name
   mysqlserver_default:
     external: true
   redis_default:

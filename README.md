@@ -3,6 +3,7 @@
 一键安装 `docker`
 ```shell
 curl -sSL https://get.daocloud.io/docker | sh
+curl -sSL https://get.docker.com | sudo sh
 ```
 >
 一键安装 `docker-comppose`
@@ -47,6 +48,7 @@ chmod +x /usr/local/bin/docker-compose
 | redis    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-redis.sh \| sh` | 部署`redis`  |
 | mysql    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-mysql.sh \| sh` | 部署`mysql`  |
 | api    | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-api.sh \| sh` | 基于源代码部署`api`  |
+| dist gateway | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-gateway.sh \| sh` | 基于`dist`部署网关  |
 ||||
 
 
