@@ -1,37 +1,19 @@
 version: "3.4"
 services:
-  pull:
-    image: daocloud.io/library/node:12
-    volumes: 
-      - ./:/usr/src
-    working_dir: /usr/src
-    command: 
-      - /bin/sh
-      - -c
-      - |
-        git pull origin master
-
-  build:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    volumes: 
-      - ./target:/webapps
-    network_mode: host
-
   api:
     image: adoptopenjdk:11-jre-hotspot
     # container_name: sandbox_app_api_1
     privileged: true
     working_dir: /webapps
     volumes: 
-      - ./target:/webapps
+      - ./api:/webapps
+      - ./attachments:/webapps/attachments
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
-    # extra_hosts: 
-    #   - "mysqlserver:192.168.3.239"
+    extra_hosts: 
+      - "mysqlserver:192.168.3.239"
     ports: 
       - 8080:8080
-    command: 
+    command:
       - /bin/sh
       - -c
       - |
@@ -45,3 +27,4 @@ networks:
     external: false
   # mysqlserver_default:
   #   external: false
+  

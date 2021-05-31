@@ -10,7 +10,7 @@ fi
 
 ## download Dockerfile
 echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/build/jar/Dockerfile'
-curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/build/api/Dockerfile
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/build/jar/Dockerfile
 
 ## config
 cd config

@@ -1,0 +1,9 @@
+version: "3.4"
+services:
+  build:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ./api:/webapps
+    network_mode: host

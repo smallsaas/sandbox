@@ -1,0 +1,13 @@
+version: "3.4"
+services:
+  pull:
+    image: daocloud.io/library/node:12
+    volumes: 
+      - ~/.ssh:/root/.ssh
+      - ./:/usr/src
+    working_dir: /usr/src
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        git pull origin master
