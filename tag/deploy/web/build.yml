@@ -1,0 +1,9 @@
+version: "3.4"
+services:
+  build:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: 
+      - ./dist:/dist
+    network_mode: host

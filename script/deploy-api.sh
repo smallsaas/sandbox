@@ -17,7 +17,13 @@ cd config
 echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/config/application-dev.yml'
 curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/config/application-dev.yml
 cd ..
-                  
+
+## pull.yml
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/pull.yml'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/script/pull.yml
+## build.yml
+echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/build.yml'
+curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/tag/deploy/api/build.yml
 
 if [ ! -f deploy.sh ];then
   echo 'curl -sOL https://gitee.com/smallsaas/sandbox/raw/master/scripot/deploy.sh'
