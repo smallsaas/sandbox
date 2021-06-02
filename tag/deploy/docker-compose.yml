@@ -3,6 +3,8 @@ version: "3.4"
 services:
   api:
     image: sandbox-app:api  #change the api iamge
+    privileged: true
+    restart: always
     volumes: 
       - ./api/config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
@@ -14,6 +16,8 @@ services:
 
   web:
     image: sandbox-app:gateway  #change the web image 
+    privileged: true
+    restart: always
     volumes: 
       - ./bin/attachments:/usr/share/nginx/html/attachments
       - ./gateway/conf.d/80.conf:/etc/nginx/conf.d/80.conf

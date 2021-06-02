@@ -2,6 +2,8 @@ version: "3.4"
 services:
   web:
     image: daocloud.io/library/nginx:latest
+    privileged: true
+    restart: always
     volumes: 
       - ./dist:/usr/share/nginx/html
       - ./attachments:/usr/share/nginx/html/attachments

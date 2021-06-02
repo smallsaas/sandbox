@@ -2,6 +2,7 @@ services:
     api:
       image: zelejs/allin-web:jre11  # any name
       privileged: true
+      restart: always
       volumes:
         - /etc/localtime:/etc/localtime:ro
         - ./api:/webapps
@@ -9,7 +10,6 @@ services:
         - ./config/application-dev.yml:/webapps/config/application-dev.yml
       ports:
         - 8080:8080
-      restart: always
       networks: 
         - sandbox_default
         # - mysqlserver_default

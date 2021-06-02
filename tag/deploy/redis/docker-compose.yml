@@ -6,6 +6,7 @@ services:
     image: redis:6.2.3
     container_name: redis
     privileged: true
+    restart: always
     volumes:
       - ./redis/conf:/usr/local/etc/redis
     command:

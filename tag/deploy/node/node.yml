@@ -2,6 +2,7 @@ version: "3.4"
 services:
   web:
     image: daocloud.io/library/node:12
+    restart: always
     working_dir: /usr/src
     volumes: 
       - ./package.json:/usr/src/package.json
