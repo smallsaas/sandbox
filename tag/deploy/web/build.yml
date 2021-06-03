@@ -7,3 +7,11 @@ services:
     volumes: 
       - ./dist:/dist
     network_mode: host
+
+  web:
+    image: daocloud.io/library/nginx:latest
+    # container_name: myapp_web
+    volumes: 
+      - ./dist:/usr/share/nginx/html
+    ports:
+      - 8000:80

@@ -13,4 +13,4 @@ ADD ./public ./public
 RUN --mount=type=cache,id=node_modules_cache,target=/usr/src/node_modules,rw npm run build 
 
 ## final
-CMD ["sh", "-c", "/bin/cp -r /usr/src/build/* /dist"]
+CMD ["sh", "-c", "rm -rf /dist/* && /bin/cp -r /usr/src/build/* /dist"]
