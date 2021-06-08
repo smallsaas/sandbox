@@ -6,11 +6,11 @@ services:
     privileged: true
     working_dir: /webapps
     volumes: 
-      - ./:/webapps
+      - ./target:/webapps
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
       - 8080:8080
-    command: 
+    command:
       - /bin/sh
       - -c
       - |
