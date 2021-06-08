@@ -21,7 +21,8 @@ chmod +x /usr/local/bin/docker-compose
 ||||
 
 #### 一键启动
-> 通过容器启动已构建的 `dist`或`-standalone.jar`
+> 通过容器启动已构建的 `dist` 或`-standalone.jar`
+
 | Type     | Script                                                                                 | Link                          |
 | :------- | :------------------------------------------------------------------------------------- | ----------------------------- |
 | dist | `curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh \| sh` | 直接启动`dist` |
@@ -81,6 +82,40 @@ package.json
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | sh 
 ```
 
+
+## 启动
+
+#### 一键启动`dist`
+> 脚本 [run-dist.sh](./script/run-dist.sh)
+>
+已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务
+```
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh 
+```
+
+#### 一键启动`-standalone.jar`
+> 脚本 [run-jar.sh](./script/run-jar.sh)
+>
+已构建出`.jar`，在同级目录下执行以下脚本实现一键启动服务
+>
+如果`.jar`在`target`目录，编辑`docker-compose.yml`中的 `volumes`为    
+```
+volumes: 
+   - ./target:/webapps
+```      
+>
+同时编辑`./config/application-dev.yml`中的数据库连接配置 再重新执行 `docker-compose up`
+>
+第一次执行, 将自动下载部署文件
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh | sh
+```
+编辑后再次执行 直接运行以下命令
+```shell
+docker-compose up
+```
+
+
 ## 构建镜像
 
 #### 一键构建`api`镜像
@@ -137,41 +172,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.s
 ```
 
 
-## 启动
-
-#### 一键启动`dist`
-> 脚本 [run-dist.sh](./script/run-dist.sh)
->
-已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务
-```
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh 
-```
-
-#### 一键启动`-standalone.jar`
-> 脚本 [run-jar.sh](./script/run-jar.sh)
->
-已构建出`.jar`，在同级目录下执行以下脚本实现一键启动服务
->
-如果`.jar`在`target`目录，编辑`docker-compose.yml`中的 `volumes`为    
-```
-volumes: 
-   - ./target:/webapps
-```      
->
-同时编辑`./config/application-dev.yml`中的数据库连接配置 再重新执行 `docker-compose up`
->
-第一次执行, 将自动下载部署文件
-```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh | sh
-```
-编辑后再次执行 直接运行以下命令
-```shell
-docker-compose up
-```
-
-
 ##### 如何执行失
-
 
 #### 一键启动`[src, package.json]` 
 > 脚本 [web-run.sh](./script/web-run.sh)
