@@ -53,9 +53,9 @@ chmod +x /usr/local/bin/docker-compose
 ||||
 
 
-## 构建安装包
+## 一键构建
 
-#### 一键构建`.jar`
+#### 一键构建 `.jar`
 > 脚本 [build-jar.sh](./script/build-jar.sh)
 >
 源代码目录如下
@@ -68,7 +68,7 @@ pom.xml
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-jar.sh | sh 
 ```
 
-#### 一键构建`dist`
+#### 一键构建 `dist`
 > 脚本 [build-dist.sh](./script/build-dist.sh)
 >
 源代码目录如下
@@ -83,9 +83,9 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | s
 ```
 
 
-## 启动
+## 一键启动
 
-#### 一键启动`dist`
+#### 一键启动 `dist`
 > 脚本 [run-dist.sh](./script/run-dist.sh)
 >
 已构建出`dist`，在同级目录下执行以下脚本实现一键启动服务
@@ -93,7 +93,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-dist.sh | s
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-dist.sh | sh 
 ```
 
-#### 一键启动`-standalone.jar`
+#### 一键启动 `-standalone.jar`
 > 脚本 [run-jar.sh](./script/run-jar.sh)
 >
 已构建出`.jar`，在同级目录下执行以下脚本实现一键启动服务
@@ -115,10 +115,18 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-jar.sh | sh
 docker-compose up
 ```
 
+#### 一键启动`[src, package.json]` 
+> 脚本 [web-run.sh](./script/web-run.sh)
+>
+`web`源代码同级目录下执行以下脚本实现一键启动服务
+>
+```shell
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
+```
 
-## 构建镜像
+## 一键构建镜像
 
-#### 一键构建`api`镜像
+#### 一键构建 `api` 镜像
 - 基于`-standalone.jar`构建
 > 脚本 [build-jar-image.sh](./script/build-jar-image.sh)
 ```
@@ -149,7 +157,7 @@ curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-pom-image.s
 sh mvn.sh
 ```
 
-#### 一键构建`web`镜像
+#### 一键构建 `web` 镜像
 - 基于`dist`构建
 > 脚本 [build-dist-image.sh](./script/build-dist-image.sh)
 >
@@ -171,14 +179,28 @@ package.json
 curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/build-web-image.sh | sh -s <image>
 ```
 
+## 一键部署
 
-##### 如何执行失
+#### 一键部署 `dist gateway` 镜像
+基于 `dist` 部署 gateway 应用
+>
+在 `dist` 同级目录下执行以下脚本
 
-#### 一键启动`[src, package.json]` 
-> 脚本 [web-run.sh](./script/web-run.sh)
->
-`web`源代码同级目录下执行以下脚本实现一键启动服务
->
 ```shell
-curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/run-web.sh | sh 
+curl -sL https://gitee.com/smallsaas/sandbox/raw/master/script/deploy-gateway.sh | sh
+```
+>
+进一步修改配置
+- 修改 `docker-compose.yml` 配置中的 network, 使之与 api 使用的 `network` 一致
+- 修改 `conf.d/80.conf` 配置中的 api 路由
+>
+
+修改过 `docker-compose.yml`，重新执行启动
+```shell
+docker-compose up -d 
+```
+>
+修改过除 `docker-compose.yml` 之外的配置文件 (e.g. `conf.d/80.conf`)，重新 docker restart
+```shell
+docker-compose restart
 ```
