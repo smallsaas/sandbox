@@ -1,0 +1,19 @@
+version: "3.4"
+services:
+  m2:
+    image: zelejs/allin-web:alpine-m2
+    volumes:
+      - ~/.m2:/var/m2
+    command:
+      - /bin/sh
+      - -c
+      - |
+       cp /root/.m2/settings.xml /var/m2
+
+  mvn:
+    image: maven:3.6.0-jdk-11-slim
+    working_dir: /usr/src
+    volumes:
+      - ~/.m2:/root/.m2
+      - ./pom.xml:/usr/src/pom.xml
+      - ./src:/usr/src/src
