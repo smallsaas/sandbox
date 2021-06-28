@@ -1,0 +1,12 @@
+version: "3"
+# docker run --rm -it quay.io/evl.ms/curl:3.8 curl -v jsonip.com
+services:
+  curl:
+    image: quay.io/evl.ms/curl:3.8
+
+  alpine:
+    image: alpine:latest
+
+networks:
+  default:
+    name: tools_network  # change network to test
