@@ -1,0 +1,11 @@
+version: "3"
+# docker run --rm -it quay.io/evl.ms/curl:3.8 curl -v jsonip.com
+services:
+  jar:
+    #alpine, jdk-11.0.11_9-alpine, x86_64-alpine-jdk-11.0.11_9
+    image: docker pull adoptopenjdk/openjdk11:jdk-11.0.11_9-alpine
+    working_dir: /webapps
+    volumes:
+      - ./:/webapps
+    network_mode: host
+    
