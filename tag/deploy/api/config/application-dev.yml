@@ -13,4 +13,4 @@ spring:
 
 logging:
   level: debug
-  file: logs/trace.log
+  file: logs/access.log
