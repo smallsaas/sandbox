@@ -8,3 +8,9 @@ services:
     volumes: 
       - ./target:/webapps
     network_mode: host
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /bin/cp target/*-standalone.jar /webapps
+
