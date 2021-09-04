@@ -1,0 +1,44 @@
+version: "3.4"
+services:
+  api:
+    image: adoptopenjdk:11-jre-hotspot
+    privileged: true
+    restart: always
+    working_dir: /webapps
+    volumes: 
+      - ./:/webapps
+      - ./config/application-dev.yml:/webapps/config/application-dev.yml
+    ports: 
+      - 8080:8080
+    command:
+      - /bin/sh
+      - -c
+      - |
+        java -jar *.jar --sprint.profiles.active=dev --server.port=8080
+    logging: 
+      driver: "json-file"
+      options: 
+        max-size: "5k"
+     
+ mysqlserver:
+    image: daocloud.io/library/mysql:5.7
+    container: mysqlserver
+    privileged: true
+    restart: always
+    volumes:
+       - ./mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
+       - ./mysql/data:/var/lib/mysql
+       - ./mysql/logs:/var/log/mysql
+       - ./mysql:/mysql
+       - ./mysql/tmp:/mysql/tmp
+      #  - ./mall-mysql/app-data.sql:/mysql/date/init.sql
+    environment:
+       TZ: "Asia/Shanghai"
+       MYSQL_DATABASE: test
+       MYSQL_ROOT_PASSWORD: root
+    logging: 
+      driver: "json-file"
+      options: 
+        max-size: "2k"
+
+    

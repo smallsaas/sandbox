@@ -1,0 +1,22 @@
+version: "3.4"
+services:
+  api:
+    image: adoptopenjdk:11-jre-hotspot
+    privileged: true
+    working_dir: /webapps
+    volumes: 
+      - ./:/webapps
+      - ./config/application-dev.yml:/webapps/config/application-dev.yml
+    ports: 
+      - 8080:8080
+    command:
+      - /bin/sh
+      - -c
+      - |
+        java -jar *.jar --sprint.profiles.active=dev --server.port=8080
+    logging: 
+      driver: "json-file"
+      options: 
+        max-size: "5k"
+  
+     
