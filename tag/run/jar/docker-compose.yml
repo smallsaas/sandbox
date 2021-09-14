@@ -6,6 +6,7 @@ services:
     privileged: true
     working_dir: /webapps
     volumes: 
+      - /etc/localtime:/etc/localtime:ro
       - ./:/webapps
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
     ports: 
