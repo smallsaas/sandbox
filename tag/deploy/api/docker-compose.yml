@@ -7,6 +7,7 @@ services:
     restart: always
     working_dir: /webapps
     volumes: 
+      - /etc/localtime:/etc/localtime:ro
       - ./api:/webapps
       - ./attachments:/webapps/attachments
       - ./config/application-dev.yml:/webapps/config/application-dev.yml
