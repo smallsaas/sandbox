@@ -1,0 +1,26 @@
+
+version: '3.4'
+## change target_network to the current working network
+services:
+  api:
+    image: mcr.microsoft.com/dotnet/runtime:5.0
+    privileged: true
+    restart: always
+    working_dir: /app
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "5m"
+    volumes:
+      - ./api:/app/publish
+    entrypoint: 
+      - dotnet
+      - api-service-name.dll
+    networks: 
+      - target_network
+
+networks: 
+  target_network:
+    external: false
+
+    

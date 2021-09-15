@@ -1,0 +1,25 @@
+
+version: '3.4'
+## chagne apiservicename as the service name
+## change target_network to the current working network
+services:
+  api:
+    image: apiservicename:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args: 
+        NETCORE_APP_NAME: 'app-name'
+    privileged: true
+    restart: always
+    working_dir: /app
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "5m"
+    networks: 
+      - target_network
+
+networks: 
+  target_network:
+    external: false
