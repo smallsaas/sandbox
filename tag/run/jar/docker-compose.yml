@@ -21,4 +21,4 @@ services:
       - /bin/sh
       - -c
       - |
-        java -jar *.jar --sprint.profiles.active=dev --server.port=8080
+        java $JAVA_OPTS -jar *.jar --sprint.profiles.active=dev --server.port=8080
