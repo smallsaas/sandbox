@@ -20,4 +20,4 @@ COPY ./src ./src
 RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=false package -Dmaven.test.skip=true
 
 ## final
-CMD ["sh", "-c", "/bin/cp /usr/src/target/*-standalone.jar /webapps"]
+CMD ["sh", "-c", "/bin/cp /usr/src/target/*-standalone.jar /var/webapps"]
