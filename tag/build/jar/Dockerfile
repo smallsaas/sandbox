@@ -8,6 +8,8 @@ WORKDIR /root/.m2
 COPY --from=M2 /root/.m2 /root/m2
 RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/m2/* /root/.m2
 
+RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw rm -rf /root/.m2/repository/com/jfeat
+
 ## mvn package
 WORKDIR /usr/src
 
