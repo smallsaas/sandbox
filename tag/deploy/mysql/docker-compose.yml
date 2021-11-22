@@ -12,6 +12,8 @@ services:
       - ./data:/var/lib/mysql
       - ./logs:/var/log/mysql
       - ./mysql.conf.d/sql_mode.cnf:/etc/mysql/mysql.conf.d/sql_mode.cnf
+      - ./mysql.conf.d/utf8.cnf:/etc/mysql/mysql.conf.d/utf8.cnf
+      # - ./mysql.conf.d/utf8mb4.cnf:/etc/mysql/mysql.conf.d/utf8mb4.cnf
       # - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
     command: 
       - '--character-set-server=utf8mb4'

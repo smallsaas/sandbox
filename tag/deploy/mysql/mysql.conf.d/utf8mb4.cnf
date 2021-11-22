@@ -1,0 +1,23 @@
+[mysqld]
+# character_set_server=utf8
+# init_connect='SET NAMES utf8'
+character-set-server = utf8mb4
+init_connect=?~@~YSET NAMES utf8mb4?~@~Y
+character-set-client-handshake = FALSE
+collation-server = utf8mb4_unicode_ci
+
+[mysql]
+# default-character-set = utf8
+default-character-set = utf8mb4
+
+[mysql.server]
+# default-character-set = utf8
+default-character-set = utf8mb4
+
+[mysqld_safe]
+# default-character-set = utf8
+default-character-set = utf8mb4
+
+[client]
+# default-character-set = utf8
+default-character-set = utf8mb4
