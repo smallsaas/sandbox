@@ -15,3 +15,18 @@ spring:
 logging:
   level: debug
   file: logs/access.log
+
+---
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;
+    driver-class-name: org.h2.Driver
+    username: sa
+    filters: log4j,wall,mergeStat
+    sql-script-encoding: UTF-8
+    initialize: true
+
+logging:
+  level: debug
+  file: logs/access.log
