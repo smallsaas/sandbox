@@ -1,9 +1,13 @@
 version: "3.4"
 services:
   web:
-    image: daocloud.io/library/nginx:latest
+    image: nginx:stable
     privileged: true
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1k"    
     volumes: 
       - ./dist:/usr/share/nginx/html
       - ./config.js:/usr/share/nginx/html/config.js
@@ -11,9 +15,4 @@ services:
       # - ./attachments:/usr/share/nginx/html/attachments
     ports:
       - 8000:80
-  
-networks: 
-  default:
-    # change network here to align up with the api network
-    name: api_default
-    external: true
+    network_mode: net_name
