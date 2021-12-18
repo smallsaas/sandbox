@@ -19,7 +19,7 @@ RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline
 
 # # To package the application
 COPY ./src ./src
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=true package -Dmaven.test.skip=true
+RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=false package -Dmaven.test.skip=true
 
 ## final
-CMD ["sh", "-c", "/bin/cp /usr/src/target/*.jar /var/webapps"]
+CMD ["sh", "-c", "/bin/cp /usr/src/target/*-standalone.jar /var/webapps"]
