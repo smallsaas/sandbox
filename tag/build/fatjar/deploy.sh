@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 ######################
 deploy_container=${CONTAINER}
-deploy_standalone=${STANDALONE}
 ####################
 if [ ! $deploy_container ];then 
    echo env CONTAINER not yet exported !
-   exit
-fi
-if [ ! $deploy_standalone ];then 
-   echo env STANDALONE not yet exported !
    exit
 fi
 #########################
@@ -16,6 +11,7 @@ fi
 ENDPOINT="http://localhost"
 SOCK_OPT='--unix-socket /var/run/docker.sock'
 
+## working dir within container => /webapps
 # workingdir(){
 #    endpoint=$1
 #    container=$2
@@ -46,6 +42,7 @@ getcontainerjsonvalue(){
    echo $result
 }
 
+# working dir from filesystem
 getcontainerworkingdir(){
    endpoint=$1
    container=$2
@@ -85,22 +82,39 @@ restartcontainer(){
 #       echo tar zcvf $app.tar.gz $app > /dev/stderr
 #       tar zcvf $app.tar.gz $app
 #    fi
-#    ls $app.tar.gz
 #    cd $wdir
+#    echo $standalone.tar.gz
 # }
 
-putstandalone(){
-    endpoint=$1
-    container=$2
-    working_dir=$3
-    standalone=$4
-
-    echo curl -X PUT ${endpoint}/containers/${container}/archive?path=$working_dir -H \'Content-Type: application/x-tar\' --data-binary @$standalone.tar.gz > /dev/stderr
-    curl -X PUT ${endpoint}/containers/${container}/archive?path=$working_dir -H 'Content-Type: application/x-tar' --data-binary @$standalone.tar.gz
+findstandalone(){
+   local result=$(ls *-standalone.jar target/*-standalone.jar 2> /dev/null)
+   if [ -z "$result" ];then
+      echo "$result not found !" > /dev/stderr
+      exit
+   fi
+   if [ ! -f "$result" ];then 
+      echo "multi standalone found: $result !" > /dev/stderr
+      exit
+   fi
+   echo $result
 }
+
+# putstandalone(){
+#     endpoint=$1
+#     container=$2
+#     working_dir=$3
+#     jartar=$4
+
+#     echo curl -X PUT ${endpoint}/containers/${container}/archive?path=$working_dir -H \'Content-Type: application/x-tar\' --data-binary @$jartar > /dev/stderr
+#     curl -X PUT ${endpoint}/containers/${container}/archive?path=$working_dir -H 'Content-Type: application/x-tar' --data-binary @$jartar
+# }
 
 
 ### start to deploy
+deploy_standalone=$(findstandalone)
+if [ ! $deploy_standalone ];then
+   exit
+fi
 
 ## stop container first
 echo stopping container $deploy_container ..
@@ -115,17 +129,19 @@ echo stopped: $status !
 
 ## build tar
 # echo build tar $deploy_standalone.tar.gz ..
-# buildtar $deploy_standalone
+# jartar=$(buildtar $deploy_standalone)
  
 ## put standalone 
 echo deploying $deploy_standalone ..
-working_dir=$(getcontainerworkingdir $ENDPOINT $deploy_container 2> /dev/null)
-# putstandalone $ENDPOINT $deploy_container $working_dir $deploy_standalone
+# working_dir=$(workingdir $ENDPOINT $deploy_container 2> /dev/null)
+# putstandalone $ENDPOINT $deploy_container $working_dir $jartar
+## local deploy
+filesystem_workingdir=$(getcontainerworkingdir $ENDPOINT $deploy_container 2> /dev/null)
 app=${deploy_standalone#*/}
-ls -l $working_dir/$app
-echo cp $deploy_standalone $working_dir
-cp $deploy_standalone $working_dir
-ls -l $working_dir/$app
+ls -l $filesystem_workingdir/$app
+echo cp $deploy_standalone $filesystem_workingdir
+cp $deploy_standalone $filesystem_workingdir
+ls -l $filesystem_workingdir/$app
 
 ## restart container
 echo restarting container $deploy_container ..

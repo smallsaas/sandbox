@@ -7,7 +7,7 @@ docker run --rm -v ${PWD}:/var/build zelejs/sandbox cp /sandbox/tag/build/fatjar
 fi
 
 ## build jar
-DOCKER_BUILDKIT=1 docker build . -t $image
+DOCKER_BUILDKIT=1 docker build . -t $image --no-cache
 docker run --rm -v ${PWD}/target:/var/webapps $image
 ls target/*.jar
 docker image rm $image
