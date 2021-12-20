@@ -17,7 +17,7 @@ RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-
 
 
 #cache-stage
-FROM nft:cache-m2 as cache
+FROM allin-web:cache-package-m2 as cache
 
 #builk-stage
 FROM maven:3.6.0-jdk-11-slim AS build

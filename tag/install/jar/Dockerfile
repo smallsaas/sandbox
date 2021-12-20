@@ -1,7 +1,4 @@
 # DOCKER_BUILDKIT=1 docker build . -t install-jar-1 --no-cache
-## m2 stage
-FROM zelejs/allin-web:m2 AS m2
-
 ## src stage
 FROM zelejs/allin-web:git AS git
 WORKDIR /root/m2
@@ -15,23 +12,24 @@ WORKDIR /usr
 RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-oms src
 ######################################
 
-FROM install-jar:cache-m2 as cache
+#m2
+FROM zelejs/allin-web:m2 AS m2
+
+#cache-stage
+FROM allin-web:cache-package-m2 as cache
+COPY --from=m2 /root/.m2/settings.xml /root/m2
 
 #builk-stage
 FROM maven:3.6.0-jdk-11-slim AS build
 
-WORKDIR /root/m2
-COPY --from=cache /var/m2 /root/m2
-
-
 # init .m2 from alpine-m2 image first
 WORKDIR /root/m2
-COPY --from=git /root/m2/settings.xml /root/m2
+COPY --from=cache /root/m2 /root/m2
 RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/m2/* /root/.m2
+
 
 ## mvn package
 WORKDIR /usr/src
-
 # RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
 COPY --from=git /usr/src/pom.xml  ./pom.xml
 COPY --from=git /usr/src/src ./src
@@ -41,7 +39,6 @@ RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=true
 
 
 ## final
-WORKDIR /var/m2
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
-
+# WORKDIR /var/m2
+# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
 CMD ["sh", "-c", "/bin/cp /usr/src/target/*.jar /var/webapps"]

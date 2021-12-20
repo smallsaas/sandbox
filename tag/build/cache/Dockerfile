@@ -1,7 +1,4 @@
-# DOCKER_BUILDKIT=1 docker build . -t install-jar-1 --no-cache
-## m2 stage
-FROM zelejs/allin-web:alpine-m2 AS m2
-
+# DOCKER_BUILDKIT=1 docker build . -t allin-web:cache-package-m2 --no-cache
 ## src stage
 FROM zelejs/allin-web:git AS git
 # RUN echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > /root/.ssh/known_hosts
@@ -13,6 +10,8 @@ WORKDIR /usr
 RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-artifact-auth src
 ######################################
 
+## m2 stage
+FROM zelejs/allin-web:alpine-m2 AS m2
 
 #builk-stage
 FROM maven:3.6.0-jdk-11-slim AS build
@@ -32,8 +31,12 @@ COPY --from=git /usr/src/src ./src
 RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw rm -rf /root/.m2/repository/com/jfeat/
 RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=true package -Dmaven.test.skip=true
 
+## get cache
+WORKDIR /var/m2
+RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
 
 ## final-cache
 FROM alpine:3.12
 WORKDIR /root/m2
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /root/m2
+COPY --from=build /var/m2 /root/m2
+
