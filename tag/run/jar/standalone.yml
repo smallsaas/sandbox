@@ -2,9 +2,10 @@ version: "3.4"
 services:
   api:
     image: adoptopenjdk:11-jre-hotspot
+    # container_name: allin_web_run_standalone_1
     working_dir: /webapps
     volumes: 
-      - ./:/webapps
+      - ${PWD}/:/webapps
     ports:
       - 8080:8080
     logging:
