@@ -1,4 +1,5 @@
-# DOCKER_BUILDKIT=1 docker build . -t allin-web:cache-package-m2 --no-cache
+# DOCKER_BUILDKIT=1 docker build . -t allin-web-install-jar-1 --no-cache
+# docker build . -t allin-web-install-jar-1 --no-cache
 ## src stage
 FROM zelejs/allin-web:git AS git
 # RUN echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > /root/.ssh/known_hosts
@@ -7,36 +8,35 @@ FROM zelejs/allin-web:git AS git
 RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 ####################################
 WORKDIR /usr
-RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-artifact-auth src
+RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-oms src
 ######################################
 
-## m2 stage
-FROM zelejs/allin-web:alpine-m2 AS m2
+#cache-stage
+FROM allin-web:cache-install-m2 as cache
 
 #builk-stage
 FROM maven:3.6.0-jdk-11-slim AS build
-WORKDIR /root/m2
-COPY --from=m2 /root/.m2 /root/m2
 
 # init .m2 from alpine-m2 image first
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/m2/* /root/.m2
+WORKDIR /root/.m2
+COPY --from=cache /root/.m2 /root/.m2
+
 
 ## mvn package
 WORKDIR /usr/src
-
 # RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
 COPY --from=git /usr/src/pom.xml  ./pom.xml
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
 COPY --from=git /usr/src/src ./src
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw rm -rf /root/.m2/repository/com/jfeat/
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=true package -Dmaven.test.skip=true
+# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
+RUN rm -rf /root/.m2/repository/com/jfeat/
+RUN mvn -DskipStandalone=true install deploy -Dmaven.test.skip=true
 
-## get cache
-WORKDIR /var/m2
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
 
-## final-cache
+## final
 FROM alpine:3.12
-WORKDIR /root/m2
-COPY --from=build /var/m2 /root/m2
+WORKDIR /usr/src/target
+COPY --from=build /usr/src/target/*.jar .
+# WORKDIR /var/m2
+# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
+CMD ["sh", "-c", "/bin/cp /usr/src/target/*.jar /var/webapps"]
 
