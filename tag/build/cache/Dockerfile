@@ -16,27 +16,19 @@ FROM zelejs/allin-web:alpine-m2 AS m2
 #builk-stage
 FROM maven:3.6.0-jdk-11-slim AS build
 WORKDIR /root/m2
-COPY --from=m2 /root/.m2 /root/m2
-
-# init .m2 from alpine-m2 image first
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/m2/* /root/.m2
+COPY --from=m2 /root/.m2 /root/.m2
 
 ## mvn package
 WORKDIR /usr/src
 
-# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
 COPY --from=git /usr/src/pom.xml  ./pom.xml
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
 COPY --from=git /usr/src/src ./src
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw rm -rf /root/.m2/repository/com/jfeat/
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn -DskipStandalone=true package -Dmaven.test.skip=true
+RUN rm -rf /root/.m2/repository/com/jfeat/
+RUN mvn -DskipStandalone=true package -Dmaven.test.skip=true
 
-## get cache
-WORKDIR /var/m2
-RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw cp -r /root/.m2/* /var/m2
 
 ## final-cache
 FROM alpine:3.12
-WORKDIR /root/m2
-COPY --from=build /var/m2 /root/m2
+WORKDIR /root/.m2
+COPY --from=build /root/.m2 /root/.m2
 
