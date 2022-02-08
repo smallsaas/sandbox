@@ -1,0 +1,38 @@
+# docker build . -f Dockerfile.install.cache -t allin-web:cache-install-m2 --no-cache 
+## src stage
+FROM zelejs/allin-web:git AS git
+# RUN echo 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > /root/.ssh/known_hosts
+# RUN echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==' >> /root/.ssh/known_hosts
+# RUN echo 'github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=' >> /root/.ssh/known_hosts
+RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
+####################################
+WORKDIR /usr
+RUN git clone --depth=1 git@github.com:smallsaas/nft-web.git --single-branch src
+######################################
+
+#builk-stage
+FROM daocloud.io/library/node:12 AS build
+
+## mvn package
+WORKDIR /usr/src
+
+# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
+COPY --from=git /usr/src/package.json  ./package.json
+# COPY --from=git /usr/src/webpack.config.js  ./webpack.config.js
+# COPY --from=git /usr/src/src ./src
+# COPY --from=git /usr/src/init.js ./init.js
+
+# RUN --mount=type=cache,id=m2_cache,target=/root/.m2,rw mvn dependency:go-offline -Dmaven.main.skip=true -Dmaven.test.skip=true
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm install --force
+
+## reinstall zero-element-antd
+RUN rm -rf node_modules/zero-element-antd
+RUN npm install git://github.com/kequandian/zero-element-antd.git#master
+
+
+# #final-stage
+# FROM alpine:3.12
+# WORKDIR /root/node_modules
+# COPY --from=build /usr/src/node_modules /root/node_modules
+# WORKDIR /root
