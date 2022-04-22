@@ -10,6 +10,7 @@ WORKDIR /usr
 RUN git clone --depth=1 git@github.com:smallsaas/nft.git --single-branch -b nft-oms src
 ######################################
 
+
 #m2
 FROM zelejs/allin-web:alpine-m2 AS M2
 
