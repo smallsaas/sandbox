@@ -55,9 +55,13 @@ if [ $port ];then
 fi
 jar_line=$(parsejarvolume $jar_target)
 
+
+javabin=$0
+javabin=${javabin##*/}
+
 # echo docker run --rm $port_line $jar_line $image java $@
 docker run --privileged --rm \
 -v /etc/localtime:/etc/localtime:ro \
 -v /etc/timezone:/etc/timezone:ro \
 $port_line $jar_line \
-$image java $@
+$image $javabin $@
