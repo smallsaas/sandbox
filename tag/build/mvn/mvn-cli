@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# docker run --rm -v $HOME/.m2:/var/.m2 zelejs/allin-web:m2  cp /root/.m2/settings.xml /var/.m2
+# docker run --rm -v $HOME/.m2:/var/.m2 zelejs/allin-web:cache-artifact-1  cp /root/.m2/settings.xml /var/.m2
+
+docker run --rm -it -v $PWD/pom.xml:/usr/src/pom.xml -v $PWD/src:/usr/src/src -v $HOME/.m2:/root/.m2 -v $PWD/target:/var/target -w /usr/src maven:3.6-adoptopenjdk-11 bash

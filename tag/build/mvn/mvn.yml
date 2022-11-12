@@ -3,15 +3,15 @@ services:
   m2:
     image: zelejs/allin-web:alpine-m2
     volumes:
-      - ~/.m2:/var/m2
+      - ~/.m2:/var/.m2
     command:
       - /bin/sh
       - -c
       - |
-       cp /root/.m2/settings.xml /var/m2
+       cp /root/.m2/settings.xml /var/.m2
 
   mvn:
-    image: maven:3.6.0-jdk-11-slim
+    image: maven:3.6-adoptopenjdk-11
     working_dir: /usr/src
     volumes:
       - ~/.m2:/root/.m2

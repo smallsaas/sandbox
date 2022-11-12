@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# docker run --rm -v $HOME/.m2:/var/.m2 zelejs/allin-web:m2  cp /root/.m2/settings.xml /var/.m2
+docker run --rm -v $HOME/.m2:/var/.m2 zelejs/allin-web:cache-artifact-1  cp /root/.m2/settings.xml /var/.m2
